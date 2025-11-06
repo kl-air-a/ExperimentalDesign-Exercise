@@ -11,6 +11,8 @@ import time
 from IPython.display import clear_output
 import random
 from openpyxl import load_workbook
+import pandas as pd
+import gradio as gr
 
 def req():
     import matplotlib.pyplot as plt
@@ -28,6 +30,36 @@ def req():
 def measure_some_system(x1, x2):
     y = ((x1**2-1)*(x2**2-5)+x1**2 +x2**2-6)/((x1-0.1)**2 +x2**2 +2)**2
     return y
+
+ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
+                " ",                   
+    "                    _..._                  ",   
+    "                   //''\\\                 ", 
+    "                   ||. .||                 ",  
+    "                   |\ _ /|      (          ",  
+    "                  .-/\ /\-.     )   |      ",   
+    "                 |  ` \ '  |    _   |      ",   
+    "           (     | |  |  | |    H=--+-     ",   
+    "           ))    | |__|[ | |    U   |      ",   
+    "           __    \___(_3/ /     )   |      ",   
+    "-|_H_H_|---||---------|!|/------|---|---.  ",
+    " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
+    "------------------------------------------`"]
+
+ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
+                " ",                   
+    "                    _..._                  ",   
+    "                   //''\\\                 ", 
+    "                   ||o o||                 ",  
+    "                   |\ _ /|      )          ",  
+    "                  .-/\ /\-.     (   |      ",   
+    "                 |  ` \ '  |    _   |      ",   
+    "           )     | |  |  | |    H=--+-     ",   
+    "           ((    | |__|[ | |    U   |      ",   
+    "           __    \___(_3/ /     (   |      ",   
+    "-|_H_H_|---||---------|!|/------|---|---.  ",
+    " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
+    "------------------------------------------`"]
 
 def read_excel_and_measure(sheet, delay = 7):
     df = pd.read_excel('LabBook.xlsx', sheet_name = sheet)
@@ -50,35 +82,7 @@ def read_excel_and_measure(sheet, delay = 7):
 
     print("YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ")
     time.sleep(0.5)
-    ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                 " ",                   
-        "                    _..._                  ",   
-        "                   //''\\\                 ", 
-        "                   ||. .||                 ",  
-        "                   |\ _ /|      (          ",  
-        "                  .-/\ /\-.     )   |      ",   
-        "                 |  ` \ '  |    _   |      ",   
-        "           (     | |  |  | |    H=--+-     ",   
-        "           ))    | |__|[ | |    U   |      ",   
-        "           __    \___(_3/ /     )   |      ",   
-        "-|_H_H_|---||---------|!|/------|---|---.  ",
-        " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-        "------------------------------------------`"]
-    
-    ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                 " ",                   
-        "                    _..._                  ",   
-        "                   //''\\\                 ", 
-        "                   ||o o||                 ",  
-        "                   |\ _ /|      )          ",  
-        "                  .-/\ /\-.     (   |      ",   
-        "                 |  ` \ '  |    _   |      ",   
-        "           )     | |  |  | |    H=--+-     ",   
-        "           ((    | |__|[ | |    U   |      ",   
-        "           __    \___(_3/ /     (   |      ",   
-        "-|_H_H_|---||---------|!|/------|---|---.  ",
-        " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-        "------------------------------------------`"]
+
     #display_ascii_art_slowly(ascii_art, delay = delay)
     iterate_ascii_art([ascii_art_1, ascii_art_2], t = delay)
 
@@ -91,35 +95,7 @@ def lab_measurement(x1, x2, delay = 7):
     y = measure_some_system(x1, x2)
     print("YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ")
     time.sleep(0.5)
-    ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                 " ",                   
-        "                    _..._                  ",   
-        "                   //''\\\                 ", 
-        "                   ||. .||                 ",  
-        "                   |\ _ /|      (          ",  
-        "                  .-/\ /\-.     )   |      ",   
-        "                 |  ` \ '  |    _   |      ",   
-        "           (     | |  |  | |    H=--+-     ",   
-        "           ))    | |__|[ | |    U   |      ",   
-        "           __    \___(_3/ /     )   |      ",   
-        "-|_H_H_|---||---------|!|/------|---|---.  ",
-        " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-        "------------------------------------------`"]
-    
-    ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                 " ",                   
-        "                    _..._                  ",   
-        "                   //''\\\                 ", 
-        "                   ||o o||                 ",  
-        "                   |\ _ /|      )          ",  
-        "                  .-/\ /\-.     (   |      ",   
-        "                 |  ` \ '  |    _   |      ",   
-        "           )     | |  |  | |    H=--+-     ",   
-        "           ((    | |__|[ | |    U   |      ",   
-        "           __    \___(_3/ /     (   |      ",   
-        "-|_H_H_|---||---------|!|/------|---|---.  ",
-        " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-        "------------------------------------------`"]
+
     #display_ascii_art_slowly(ascii_art, delay = delay)
     iterate_ascii_art([ascii_art_1, ascii_art_2], t = delay)
 
