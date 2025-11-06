@@ -27,7 +27,9 @@ def req():
     
     
 
-def measure_some_system(x1, x2):
+def measure_some_system(current_slope, current_constant):
+    x1 = current_slope
+    x2 = current_constant
     y = ((x1**2-1)*(x2**2-5)+x1**2 +x2**2-6)/((x1-0.1)**2 +x2**2 +2)**2
     return y
 
@@ -102,7 +104,7 @@ def table_intuitive():
         )
         save_btn = gr.Button("Save to Lab Book")
         sheet_state = gr.State("Intuitive Approach")
-        save_btn.click(_save, inputs = [table, sheet_state], outputs = [])
+        save_btn.click(_save, inputs = [table, sheet_state])
         demo.launch(share=True)  # In Colab this renders inline
     return demo
       
