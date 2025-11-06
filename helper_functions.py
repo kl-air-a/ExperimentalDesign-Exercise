@@ -116,6 +116,24 @@ def table_intuitive():
         save_btn.click(_save, inputs = [table, sheet_state], outputs = status)
         demo.launch(share=True)  # In Colab this renders inline
     return demo
+
+
+def table_random():
+    # 1) Initial table
+    init_df = pd.read_excel('LabBook.xlsx', sheet_name = 'Random Sampling')
+
+    with gr.Blocks() as demo:
+        gr.Markdown("### Your randomly selected experiments")
+        table = gr.Dataframe(
+            value=init_df,
+            headers=list(init_df.columns),
+            type = 'pandas',
+            interactive=True,
+            wrap=True,
+            datatype = ["number", "number", "number"]
+        )
+        demo.launch(share=True)  # In Colab this renders inline
+    return demo
       
 
 def read_excel_and_measure(sheet, delay = 7):
@@ -185,8 +203,6 @@ def function_fit(model_function, sheet):
     elif model_function =='gaussian':
         f = gaussian
         popt = [1,1,1,1,1]
-
-
 
     popt, pcov = curve_fit(f, [df.iloc[:, 0], df.iloc[:,1]], df.iloc[:,2], p0 = popt)
 
