@@ -12,8 +12,6 @@ from IPython.display import clear_output
 import random
 from openpyxl import load_workbook
 import gradio as gr
-import ipysheet as ips
-from IPython.display import display
 
 
 def req():
@@ -26,9 +24,6 @@ def req():
     from sklearn.gaussian_process.kernels import RBF
     from scipy.optimize import minimize
     from scipy.stats import norm 
-    import ipysheet as ips
-    from IPython.display import display
-
     
     
 
