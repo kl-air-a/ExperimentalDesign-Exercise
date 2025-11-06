@@ -74,7 +74,7 @@ def _save(df, sheet_name):
 
         # Create a Pandas ExcelWriter that *appends* to the same file
         with pd.ExcelWriter(path, engine="openpyxl", mode="a", if_sheet_exists="replace") as writer:
-            df.to_excel(writer, sheet_name=sheet, index=False)
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
 
 
         return f"✅ Saved to sheet '{sheet_name}' in LabBook.xlsx"
