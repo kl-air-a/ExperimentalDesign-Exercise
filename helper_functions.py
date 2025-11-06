@@ -37,7 +37,7 @@ def measure_some_system(x1, x2):
     return y
 
 ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                " ",                   
+                r" ",                   
     r"                    _..._                  ",   
     r"                   //''\\\                 ", 
     r"                   ||. .||                 ",  
@@ -52,7 +52,7 @@ ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
     r"------------------------------------------`"]
 
 ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-                " ",                   
+               r " ",                   
     r"                    _..._                  ",   
     r"                   //''\\\                 ", 
     r"                   ||o o||                 ",  
@@ -106,9 +106,9 @@ def table_intuitive():
             datatype = ["number", "number", "number"]
         )
         save_btn = gr.Button("Save to Lab Book")
-
-        save_btn.click(_save, inputs = [table, "Intuitive Approach"])
-
+        sheet_state = gr.State("Intuitive Approach")
+        save_btn.click(_save, inputs = [table, sheet_state], outputs = [])
+        demo.launch(share=True)  # In Colab this renders inline
     return demo
       
 
