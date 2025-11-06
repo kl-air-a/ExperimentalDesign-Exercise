@@ -38,33 +38,79 @@ def measure_some_system(x1, x2):
 
 ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
                 " ",                   
-    "                    _..._                  ",   
-    "                   //''\\\                 ", 
-    "                   ||. .||                 ",  
-    "                   |\ _ /|      (          ",  
-    "                  .-/\ /\-.     )   |      ",   
-    "                 |  ` \ '  |    _   |      ",   
-    "           (     | |  |  | |    H=--+-     ",   
-    "           ))    | |__|[ | |    U   |      ",   
-    "           __    \___(_3/ /     )   |      ",   
-    "-|_H_H_|---||---------|!|/------|---|---.  ",
-    " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-    "------------------------------------------`"]
+    r"                    _..._                  ",   
+    r"                   //''\\\                 ", 
+    r"                   ||. .||                 ",  
+    r"                   |\ _ /|      (          ",  
+    r"                  .-/\ /\-.     )   |      ",   
+    r"                 |  ` \ '  |    _   |      ",   
+    r"           (     | |  |  | |    H=--+-     ",   
+    r"           ))    | |__|[ | |    U   |      ",   
+    r"           __    \___(_3/ /     )   |      ",   
+    r"-|_H_H_|---||---------|!|/------|---|---.  ",
+    r" |_U_U_|  /__\        |_|      _[_ _|__  \ ",
+    r"------------------------------------------`"]
 
 ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
                 " ",                   
-    "                    _..._                  ",   
-    "                   //''\\\                 ", 
-    "                   ||o o||                 ",  
-    "                   |\ _ /|      )          ",  
-    "                  .-/\ /\-.     (   |      ",   
-    "                 |  ` \ '  |    _   |      ",   
-    "           )     | |  |  | |    H=--+-     ",   
-    "           ((    | |__|[ | |    U   |      ",   
-    "           __    \___(_3/ /     (   |      ",   
-    "-|_H_H_|---||---------|!|/------|---|---.  ",
-    " |_U_U_|  /__\        |_|      _[_ _|__  \ ",
-    "------------------------------------------`"]
+    r"                    _..._                  ",   
+    r"                   //''\\\                 ", 
+    r"                   ||o o||                 ",  
+    r"                   |\ _ /|      )          ",  
+    r"                  .-/\ /\-.     (   |      ",   
+    r"                 |  ` \ '  |    _   |      ",   
+    r"           )     | |  |  | |    H=--+-     ",   
+    r"           ((    | |__|[ | |    U   |      ",   
+    r"           __    \___(_3/ /     (   |      ",   
+    r"-|_H_H_|---||---------|!|/------|---|---.  ",
+    r" |_U_U_|  /__\        |_|      _[_ _|__  \ ",
+    r"------------------------------------------`"]
+
+
+def _save(df, sheet_name):
+    path = "LabBook.xlsx"  # the uploaded file name
+
+    # Load the existing workbook
+    book = load_workbook(path)
+
+    # Create a Pandas ExcelWriter that *appends* to the same file
+    with pd.ExcelWriter(path, engine="openpyxl", mode="a", if_sheet_exists="replace") as writer:
+        writer.book = book
+        # Replace the target sheet
+        df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+
+def _run(df):
+    df["Current Slope"] = pd.to_numeric(df["Current Slope"], errors="coerce")
+    df["Current Constant"] = pd.to_numeric(df["Current Constant"], errors="coerce")
+    # Compute result
+    df["Capacity Decay"] = df["Current Slope"] * df["Current Constant"]
+    return df
+
+def table_intuitive():
+    # 1) Initial table
+    init_df = pd.DataFrame({
+        "Current Slope": [3, -3, 2],
+        "Current Constant": [3, 0.8, 2.5],
+        "Capacity Decay": [None, None, None],
+    })
+
+    with gr.Blocks() as demo:
+        gr.Markdown("### Edit the table")
+        table = gr.Dataframe(
+            value=init_df,
+            headers=list(init_df.columns),
+            type = 'pandas',
+            interactive=True,
+            wrap=True,
+            datatype = ["number", "number", "number"]
+        )
+        save_btn = gr.Button("Save to Lab Book")
+
+        save_btn.click(_save, inputs = [table, "Intuitive Approach"])
+
+    return demo
+      
 
 def read_excel_and_measure(sheet, delay = 7):
     df = pd.read_excel('LabBook.xlsx', sheet_name = sheet)
