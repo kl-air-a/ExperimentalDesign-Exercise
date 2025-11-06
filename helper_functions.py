@@ -11,7 +11,8 @@ import time
 from IPython.display import clear_output
 import random
 from openpyxl import load_workbook
-import gradio as grimport ipysheet as ips
+import gradio as gr
+import ipysheet as ips
 from IPython.display import display
 
 
