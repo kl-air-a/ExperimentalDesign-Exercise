@@ -122,9 +122,8 @@ def _update(sheet_name):
     return init_df
 
 
-def table_random():
+def table_random(sheet_name):
     # 1) Initial table
-    sheet_name = 'Random Sampling'
     init_df = pd.read_excel('LabBook.xlsx', sheet_name = sheet_name)
 
     with gr.Blocks() as demo:
