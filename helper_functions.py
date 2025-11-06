@@ -52,7 +52,7 @@ ascii_art_1 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
     r"------------------------------------------`"]
 
 ascii_art_2 = ["YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ",
-               r " ",                   
+               r" ",                   
     r"                    _..._                  ",   
     r"                   //''\\\                 ", 
     r"                   ||o o||                 ",  
