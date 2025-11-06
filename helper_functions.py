@@ -140,6 +140,9 @@ def table_random(sheet_name):
         update_btn = gr.Button("Update from Lab Book")
         sheet_state = gr.State(sheet_name)
         update_btn.click(_update, inputs = sheet_state, outputs = table)
+
+        update_to = gr.Button("Write to Lab Book")
+        update_to.click(_save, inputs =[table, sheet_state], outputs = gr.Markdown())
         demo.launch(share=True)  # In Colab this renders inline
     return demo
       
