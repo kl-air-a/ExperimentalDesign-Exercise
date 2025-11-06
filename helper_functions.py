@@ -95,8 +95,8 @@ def _run(df):
 def table_intuitive():
     # 1) Initial table
     init_df = pd.DataFrame({
-        "Current Slope": [3, -3, 2],
-        "Current Constant": [3, 0.8, 2.5],
+        "Current Slope": [0, 0,0],
+        "Current Constant": [0,0, 0],
         "Capacity Decay": [None, None, None],
     })
 
@@ -115,7 +115,7 @@ def table_intuitive():
         status = gr.Markdown()  # to show success/errors
         save_btn.click(_save, inputs = [table, sheet_state], outputs = status)
         demo.launch(share=True)  # In Colab this renders inline
-    return demo
+    return 
 def _update(sheet_name):
     # 1) Initial table
     init_df = pd.read_excel('LabBook.xlsx', sheet_name = sheet_name)
@@ -144,7 +144,7 @@ def table_random(sheet_name):
         update_to = gr.Button("Write to Lab Book")
         update_to.click(_save, inputs =[table, sheet_state], outputs = gr.Markdown())
         demo.launch(share=True)  # In Colab this renders inline
-    return demo
+    return 
       
 
 def read_excel_and_measure(sheet, delay = 7):
@@ -177,8 +177,8 @@ def read_excel_and_measure(sheet, delay = 7):
 
 
 
-def lab_measurement(x1, x2, delay = 7):
-    y = measure_some_system(x1, x2)
+def lab_measurement(current_slope, current_constant, delay = 7):
+    y = measure_some_system(current_slope, current_constant)
     print("YOUR MEASUREMENT IS BEING PROCESSED. PLEASE WAIT! ")
     time.sleep(0.5)
 
@@ -249,11 +249,11 @@ def plot_gpr(gpr, x1, x2, i, resolution = 100, bounds = [-3,3], minimize =False)
         minx2 = X_all[idx][1]   
         miny = min(y)
         plt.plot(minx1, minx2, 'x', markersize = 15, color = 'g')
-        plt.savefig(f'ResultsGraphs\Bayesian_Minimum.png')
+        plt.savefig(f'Bayesian_Minimum.png')
         plt.show()
         return minx1, minx2, miny
     else:
-        plt.savefig(f'ResultsGraphs\Bayesian-{i:02d}')
+        plt.savefig(f'Bayesian-{i:02d}')
         plt.show()
 
 def show_parameter_space(): 
@@ -312,14 +312,13 @@ def bayesian_optimizer(sheet= 'Bayesian Optimization', output =True):
 
         print(' YOUR NEXT MEASUREMENT POINTS SHOULD BE: ')
         print(' Measurement 1: ')
-        print(f' Factor 1 : {next_sample_1[0]}')
-        print(f' Factor 2 : {next_sample_1[1]}')
+        print(f' Current Slope : {next_sample_1[0]}')
+        print(f' Current Constant : {next_sample_1[1]}')
         print(' Measurement 2: ')
-        print(f' Factor 1 : {next_sample_2[0]}')
-        print(f' Factor 2 : {next_sample_2[1]}')
-        print('WRITE DOWN THE POINTS IN THE LABBOOK, ')
-        print('MEASURE THEM AND ')
-        print('DONT FORGET TO CLOSE THE EXCEL FILE AGAIN.')
+        print(f' Current Slope : {next_sample_2[0]}')
+        print(f' Current Constant : {next_sample_2[1]}')
+        print('WRITE DOWN THE POINTS IN THE TABLE ABOVE (LABBOOK) ')
+        print('AND MEASURE THEM')
     
     else: 
         return gpr, x1, x2
@@ -366,7 +365,7 @@ def minimize_and_visualize(opt, cov, model_function, type, x1original=0, x2origi
 
         cbar.ax.set_ylabel('Output-Effect [au*au]', rotation=-90, va="bottom")
         plt.title(f'Results {type} Approach')
-        plt.savefig(f'ResultsGraphs\{type}.png')
+        plt.savefig(f'{type}.png')
         plt.show()
         
     else:
