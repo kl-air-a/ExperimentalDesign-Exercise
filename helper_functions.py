@@ -11,8 +11,7 @@ import time
 from IPython.display import clear_output
 import random
 from openpyxl import load_workbook
-import pandas as pd
-import gradio as gr
+
 
 def req():
     import matplotlib.pyplot as plt
@@ -24,6 +23,7 @@ def req():
     from sklearn.gaussian_process.kernels import RBF
     from scipy.optimize import minimize
     from scipy.stats import norm 
+    import gradio as gr
     
     
 
