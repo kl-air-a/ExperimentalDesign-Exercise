@@ -116,6 +116,10 @@ def table_intuitive():
         save_btn.click(_save, inputs = [table, sheet_state], outputs = status)
         demo.launch(share=True)  # In Colab this renders inline
     return demo
+def _update():
+    # 1) Initial table
+    init_df = pd.read_excel('LabBook.xlsx', sheet_name = 'Random Sampling')
+    return init_df
 
 
 def table_random():
@@ -132,6 +136,9 @@ def table_random():
             wrap=True,
             datatype = ["number", "number", "number"]
         )
+
+        update_btn = gr.Button("Update from Lab Book")
+        update_btn.click(_update, inputs = [], outputs = table)
         demo.launch(share=True)  # In Colab this renders inline
     return demo
       
