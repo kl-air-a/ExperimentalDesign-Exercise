@@ -115,7 +115,7 @@ def table_intuitive():
         save_btn = gr.Button("Save to Lab Book")
         sheet_state = gr.State("Intuitive Approach")
         status = gr.Markdown()  # to show success/errors
-        save_btn.click(_save, inputs = [table, sheet_state], output = status)
+        save_btn.click(_save, inputs = [table, sheet_state], outputs = status)
         demo.launch(share=True)  # In Colab this renders inline
     return demo
       
@@ -240,8 +240,8 @@ def show_parameter_space():
     cbar = plt.colorbar(c)
     plt.xlim(-3,3)
     plt.ylim(-3,3)
-    plt.xlabel('Factor X1')
-    plt.ylabel('Factor X2')
+    plt.xlabel('Current Slope')
+    plt.ylabel('Current Constant')
     cbar.ax.set_ylabel('Output-Effect [au*au]', rotation=-90, va="bottom")
     plt.title(f'ParameterSpace')
     plt.grid()
