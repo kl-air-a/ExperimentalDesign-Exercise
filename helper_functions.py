@@ -74,9 +74,7 @@ def _save(df, sheet_name):
 
         # Create a Pandas ExcelWriter that *appends* to the same file
         with pd.ExcelWriter(path, engine="openpyxl", mode="a", if_sheet_exists="replace") as writer:
-            writer.book = book
-            # Replace the target sheet
-            df.to_excel(writer, sheet_name=sheet_name, index=False)
+            df.to_excel(writer, sheet_name=sheet, index=False)
 
 
         return f"✅ Saved to sheet '{sheet_name}' in LabBook.xlsx"
@@ -242,7 +240,7 @@ def show_parameter_space():
     plt.ylim(-3,3)
     plt.xlabel('Current Slope')
     plt.ylabel('Current Constant')
-    cbar.ax.set_ylabel('Output-Effect [au*au]', rotation=-90, va="bottom")
+    cbar.ax.set_ylabel('Coulombic Efficiency [%]', rotation=-90, va="bottom")
     plt.title(f'ParameterSpace')
     plt.grid()
     plt.show()
