@@ -317,7 +317,8 @@ def bayesian_optimizer(sheet= 'Bayesian Optimization', output =True):
         print(' Measurement 2: ')
         print(f' Current Slope : {next_sample_2[0]}')
         print(f' Current Constant : {next_sample_2[1]}')
-        print('WRITE DOWN THE POINTS IN THE TABLE ABOVE (LABBOOK) ')
+        print('WRITE DOWN THE POINTS IN THE TABLE ABOVE (LABBOOK), ')
+        print('PRESS WRITE TO LABBOOK')
         print('AND MEASURE THEM')
     
     else: 
@@ -376,6 +377,8 @@ def minimize_and_visualize(opt, cov, model_function, type, x1original=0, x2origi
     print(f'Factor 1: {minx1}')
     print(f'Factor 2: {minx2}')
     print(f'It has the value: {miny}')
+
+    plt.savefig(f'{type}_{model_function}_Minimum.png')
 
 
 
