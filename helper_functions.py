@@ -95,8 +95,8 @@ def _run(df):
 def table_intuitive():
     # 1) Initial table
     init_df = pd.DataFrame({
-        "Current Slope": [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        "Current Constant": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "Current Slope": [None, None, None, None, None, None, None, None, None],
+        "Current Constant": [None, None, None, None, None, None, None, None, None],
         "Capacity Decay": [None, None, None, None, None, None, None, None, None],
     })
 
