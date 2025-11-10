@@ -95,8 +95,8 @@ def _run(df):
 def table_intuitive():
     # 1) Initial table
     init_df = pd.DataFrame({
-        "Current Slope": [0, 0,0, 0, 0, 0, 0, 0, 0],
-        "Current Constant": [0, 0,0, 0, 0, 0, 0, 0, 0],
+        "Current Slope": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "Current Constant": [0, 0, 0, 0, 0, 0, 0, 0, 0],
         "Capacity Decay": [None, None, None, None, None, None, None, None, None],
     })
 
@@ -116,6 +116,7 @@ def table_intuitive():
         save_btn.click(_save, inputs = [table, sheet_state], outputs = status)
         demo.launch(share=True)  # In Colab this renders inline
     return 
+
 def _update(sheet_name):
     # 1) Initial table
     init_df = pd.read_excel('LabBook.xlsx', sheet_name = sheet_name)
@@ -277,8 +278,8 @@ def show_parameter_space():
 
     
 
-def bayesian_optimizer(sheet= 'Bayesian Optimization', output =True):
-    df = pd.read_excel('LabBook.xlsx', sheet_name= sheet)
+def bayesian_optimizer(sheet='Bayesian Optimization', output=True):
+    df = pd.read_excel('LabBook.xlsx', sheet_name=sheet)
     df = df.dropna(how='all')
     print("YOUR DATA :")
     print(df)
@@ -287,7 +288,7 @@ def bayesian_optimizer(sheet= 'Bayesian Optimization', output =True):
     y = df.iloc[:,2]
 
     # define kernel and regressor
-    kernel = RBF(length_scale = 1)
+    kernel = RBF(length_scale=1)
     gpr = GaussianProcessRegressor(kernel=kernel,
             random_state=0)
     
@@ -320,7 +321,12 @@ def bayesian_optimizer(sheet= 'Bayesian Optimization', output =True):
         print('WRITE DOWN THE POINTS IN THE TABLE ABOVE (LABBOOK), ')
         print('PRESS WRITE TO LABBOOK')
         print('AND MEASURE THEM')
-    
+        
+        # write to excel file
+        df.loc[len(df)] = [next_sample_1[0], next_sample_1[1], None]
+        df.loc[len(df)] = [next_sample_2[0], next_sample_2[1], None]
+
+        df.to_excel('LabBook.xlsx', sheet_name=sheet, index=False)
     else: 
         return gpr, x1, x2
         
