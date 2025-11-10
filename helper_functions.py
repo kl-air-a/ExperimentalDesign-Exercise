@@ -318,9 +318,10 @@ def bayesian_optimizer(sheet='Bayesian Optimization', output=True):
         print(' Measurement 2: ')
         print(f' Current Slope : {next_sample_2[0]}')
         print(f' Current Constant : {next_sample_2[1]}')
-        print('WRITE DOWN THE POINTS IN THE TABLE ABOVE (LABBOOK), ')
-        print('PRESS WRITE TO LABBOOK')
-        print('AND MEASURE THEM')
+        print(f'PRESS UPDATE FROM LAB BOOK IN THE TABLE ABOVE")
+        print(f"TO SEE THE NEW MEASUREMENTS")
+        print(f"REMEASURE AND REPEAT")
+
         
         # write to excel file
         df.loc[len(df)] = [next_sample_1[0], next_sample_1[1], None]
